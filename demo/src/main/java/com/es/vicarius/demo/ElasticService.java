@@ -1,5 +1,3 @@
-// ElasticService
-
 package com.es.vicarius.demo;
 
 import org.elasticsearch.action.get.GetRequest;
@@ -21,25 +19,25 @@ public class ElasticService {
     @Autowired
     private RestHighLevelClient client;
 
-    public String criarIndice(String indice) throws IOException {
-        return "Índice criado com sucesso: " + indice;
+    public String createIndex(String index) throws IOException {
+        return "Index created successfully: " + index;
     }
 
-    public String criarDocumento(String indice, Map<String, Object> documento) throws IOException {
-        String id = criarDocumentoComID(indice, documento);
-        return "Documento criado com sucesso no índice " + indice + " com ID: " + id;
+    public String createDocument(String index, Map<String, Object> document) throws IOException {
+        String id = createDocumentWithID(index, document);
+        return "Document created successfully in index " + index + " with ID: " + id;
     }
 
-    public String criarDocumentoComID(String indice, Map<String, Object> documento) throws IOException {
-        IndexRequest request = new IndexRequest(indice);
-        request.source(documento, XContentType.JSON);
+    public String createDocumentWithID(String index, Map<String, Object> document) throws IOException {
+        IndexRequest request = new IndexRequest(index);
+        request.source(document, XContentType.JSON);
 
         IndexResponse response = client.index(request, RequestOptions.DEFAULT);
         return response.getId();
     }
 
-    public Map<String, Object> visualizarDocumento(String indice, String id) throws IOException {
-        GetRequest getRequest = new GetRequest(indice, id);
+    public Map<String, Object> viewDocument(String index, String id) throws IOException {
+        GetRequest getRequest = new GetRequest(index, id);
         GetResponse getResponse = client.get(getRequest, RequestOptions.DEFAULT);
         return getResponse.getSourceAsMap();
     }

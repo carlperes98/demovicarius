@@ -1,5 +1,3 @@
-
-
 package com.es.vicarius.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,18 +13,18 @@ public class Controller {
     @Autowired
     private ElasticService elasticService;
 
-    @PostMapping("/criar-indice")
-    public String criarIndice(@RequestParam String indice) throws IOException {
-        return elasticService.criarIndice(indice);
+    @PostMapping("/create-index")
+    public String createIndex(@RequestParam String index) throws IOException {
+        return elasticService.createIndex(index);
     }
 
-    @PostMapping("/criar-documento")
-    public String criarDocumento(@RequestParam String indice, @RequestBody Map<String, Object> documento) throws IOException {
-        return elasticService.criarDocumento(indice, documento);
+    @PostMapping("/create-document")
+    public String createDocument(@RequestParam String index, @RequestBody Map<String, Object> document) throws IOException {
+        return elasticService.createDocument(index, document);
     }
 
-    @GetMapping("/visualizar-documento")
-    public Map<String, Object> visualizarDocumento(@RequestParam String indice, @RequestParam String id) throws IOException {
-        return elasticService.visualizarDocumento(indice, id);
+    @GetMapping("/view-document")
+    public Map<String, Object> viewDocument(@RequestParam String index, @RequestParam String id) throws IOException {
+        return elasticService.viewDocument(index, id);
     }
 }
